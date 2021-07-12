@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Update and return page view count from DynamoDB via API Gateway and Lambda
+
+Resources:
+  GetCountLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Updates and returns view count via DynamoDB
+      CodeUri: GetCount/
+      Handler: getcount.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DynamoDBTable
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref DynamoDBTable
+      Events:
+        GetViewCount:
+          Type: HttpApi
+          Properties:
+            Method: GET
+            Path: /
+
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: Page
+          AttributeType: S
+      KeySchema:
+        - AttributeName: Page
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
