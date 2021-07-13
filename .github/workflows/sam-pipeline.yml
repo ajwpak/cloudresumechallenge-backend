@@ -24,8 +24,5 @@ jobs:
         run: sam build --use-container
       - name: Run pytest
         run: pytest
-
-# Run Unit tests- Specify unit tests here
-
-# sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
+      - name: sam deploy
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
