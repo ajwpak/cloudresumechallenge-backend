@@ -1,3 +1,5 @@
-# cloudresumechallenge-backend
+# Cloud Resume Challenge - Back-end Repository
 
-This repository contains backend files for the Cloud Resume Challenge.
+This repository contains back-end codes for the Cloud Resume Challenge described [here](https://cloudresumechallenge.dev/instructions/).
+
+
